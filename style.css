@@ -57,6 +57,9 @@ body {
   justify-content:space-around;
   z-index:6;
 }
+body { transition: background 1s ease; }
+.bulb { transition: filter 0.6s ease; }
+
 .bulb{
   width:28px;
   height:38px;
