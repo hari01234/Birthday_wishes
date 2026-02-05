@@ -49,11 +49,40 @@ function bigFireworkBurst() {
 }
 
 // 🎛 BUTTONS
+// lights.onclick = () => {
+//   document.body.style.background = "#FFDAB9";
+//   lights.innerText = "Lights On";
+//   celebrate.style.display = "inline";
+// };
+let lightsOn = false;
+
 lights.onclick = () => {
-  document.body.style.background = "#FFDAB9";
-  lights.innerText = "Lights On";
-  celebrate.style.display = "inline";
+
+  lightsOn = !lightsOn;   // toggle state
+
+  if (lightsOn) {
+    // 💡 LIGHTS ON
+    document.body.style.background = "#FFDAB9";
+    lights.innerText = "Turn Off Lights";
+    celebrate.style.display = "inline";
+
+    // Optional glow effect
+    document.querySelectorAll(".bulb").forEach(b => {
+      b.style.filter = "drop-shadow(0 0 10px gold)";
+    });
+
+  } else {
+    // 🌙 LIGHTS OFF
+    document.body.style.background = "#000";
+    lights.innerText = "Turn On Lights";
+    celebrate.style.display = "none";
+
+    document.querySelectorAll(".bulb").forEach(b => {
+      b.style.filter = "none";
+    });
+  }
 };
+
 
 musicBtn.onclick = () => {
   if (song.paused) {
