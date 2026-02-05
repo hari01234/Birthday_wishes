@@ -1,0 +1,220 @@
+* { box-sizing: border-box; }
+
+body {
+  margin:0;
+  background:#000;
+  color:#fff;
+  font-family:'Segoe UI', sans-serif;
+  overflow:hidden;
+  text-align:center;
+}
+
+/* 🌌 Background Layers */
+#fireworks,.stars,.shooting-stars,.sunrise {
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+}
+.stars,.shooting-stars{z-index:1;}
+#fireworks{z-index:2;}
+.sunrise{z-index:3;}
+
+/* 🎬 Intro */
+.intro{
+  position:fixed;
+  inset:0;
+  background:#000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  font-size:180%;
+  font-family:'Times New Roman', serif;
+  padding:20px;
+  animation:fadeIntro 5s forwards;
+}
+@keyframes fadeIntro{100%{opacity:0;visibility:hidden}}
+
+/* 🎏 Banner */
+.banner-wrap{
+  position:fixed;
+  top:0;
+  width:100%;
+  z-index:5;
+}
+#banner{
+  width:100%;
+  max-height:160px;
+  object-fit:cover;
+}
+
+/* 💡 Lights */
+.light-row{
+  position:fixed;
+  top:5px;
+  width:100%;
+  display:flex;
+  justify-content:space-around;
+  z-index:6;
+}
+.bulb{
+  width:28px;
+  height:38px;
+  background:url('bulb.png') center/contain no-repeat;
+  animation:glow 2s infinite alternate;
+}
+@keyframes glow{
+  from{opacity:.4;transform:scale(.9);}
+  to{opacity:1;transform:scale(1.1);}
+}
+
+/* 🎁🎂 Content */
+.gift,.cake,.message{
+  margin:220px auto 0 auto;
+  z-index:5;
+  position:relative;
+}
+
+/* 🎁 Gift */
+.gift img{
+  width:240px;
+  transition:.3s;
+}
+.gift img:hover{transform:scale(1.1);}
+
+/* 🎂 Cake */
+#cakeImg{width:320px; position:relative; z-index:2;}
+.flame{
+  position:absolute;
+  top:5px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:30px;
+  transition:.4s;
+}
+.flame.out{opacity:0;}
+
+/* 💫 Sparkles around cake */
+.cake::before, .cake::after {
+  content:"✨";
+  position:absolute;
+  font-size:22px;
+  animation: sparkle 2s infinite ease-in-out alternate;
+}
+.cake::before { left:10%; top:20%; }
+.cake::after  { right:10%; top:40%; }
+
+@keyframes sparkle {
+  from { transform:scale(0.8) rotate(0deg); opacity:.6; }
+  to   { transform:scale(1.4) rotate(20deg); opacity:1; }
+}
+
+/* 💌 Message */
+.message {
+  color:#000;
+  /* background: rgba(255,255,255,0.85); */
+  padding:30px;
+  border-radius:12px;
+  max-width:900px;
+  margin:0 auto;
+  font-size:120%;
+}
+
+/* 🎛 NEON PULSE BUTTONS */
+.controls{
+  position:fixed;
+  bottom:20px;
+  width:100%;
+  z-index:10;
+}
+
+.controls button {
+  padding:12px 22px;
+  margin:8px;
+  font-size:15px;
+  font-weight:600;
+  border-radius:30px;
+  border:2px solid transparent;
+  cursor:pointer;
+  background:#111;
+  color:#fff;
+  text-shadow:0 0 5px #fff;
+  animation:pulseGlow 2s infinite alternate;
+  transition:all 0.3s ease;
+}
+
+@keyframes pulseGlow{
+  from { box-shadow:0 0 10px rgba(255,255,255,0.3); }
+  to   { box-shadow:0 0 25px rgba(255,255,255,0.9); }
+}
+
+.controls button:hover { transform:translateY(-3px) scale(1.08); }
+.controls button:active { transform:scale(0.95); }
+
+#lights { border-color:#ffd700; }
+#music { border-color:#00f7ff; }
+#celebrate { border-color:#ff4d6d; }
+#voice { border-color:#9d4edd; }
+#pauseMusic { border-color:#00ff9d; }
+
+/* 🎵 Music Visualizer */
+.visualizer {
+  position:fixed;
+  bottom:100px;
+  width:100%;
+  display:flex;
+  justify-content:center;
+  gap:100px;
+  z-index:19;
+}
+.bar {
+  width:6px;
+  height:50px;
+  background:#00f7ff;
+  animation:musicBounce 0.4s infinite ease-in-out alternate;
+}
+.bar:nth-child(odd){animation-delay:0.1s}
+.bar:nth-child(even){animation-delay:0.6s}
+
+@keyframes musicBounce {
+  from{height:5px;}
+  to{height:100px;}
+}
+
+/* 🌟 Stars */
+.star{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:#fff;
+  border-radius:50%;
+  animation:twinkle 2s infinite alternate;
+}
+@keyframes twinkle{from{opacity:.3}to{opacity:1}}
+
+/* 🌠 Shooting Star */
+.shooting-star{
+  position:absolute;
+  width:2px;
+  height:80px;
+  background:linear-gradient(#fff,transparent);
+  transform:rotate(45deg);
+  animation:shoot 2s linear forwards;
+}
+@keyframes shoot{to{transform:translate(600px,600px) rotate(45deg);opacity:0}}
+
+/* 💖 Hearts */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  animation:floatUp 6s linear forwards;
+}
+@keyframes floatUp{to{transform:translateY(-110vh) rotate(360deg);opacity:0}}
+
+/* 🌅 Sunrise */
+.sunrise{
+  background:linear-gradient(to top,#ff9966,#ff5e62,#ffc371,#87ceeb);
+  opacity:0;
+  transition:opacity 10s;
+}
+.sunrise.show{opacity:1;}
